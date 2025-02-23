@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UserDashboard() {
     const [recipesCount, setRecipesCount] = useState(24);
-    const [savedRecipes, setSavedRecipes] = useState(15);
+    const [likedRecipes, setLikedRecipes] = useState(15);
     const [followers, setFollowers] = useState(1200);
-
+const navigate = useNavigate();
     return (
         <div className="bg-white text-gray-900 p-6">
             <h1 className="text-4xl font-bold text-center mb-10">📖 User Dashboard</h1>
@@ -13,12 +14,12 @@ export default function UserDashboard() {
             {/* Stats Section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-6 bg-emerald-500 text-white rounded-lg shadow-md text-center">
-                    <h3 className="text-lg font-semibold">Total Recipes</h3>
-                    <p className="text-3xl font-bold">{recipesCount}</p>
+                    <h3 className="text-lg font-semibold">My Recipes</h3>
+                    <p className="text-3xl font-bold" onClick={()=>navigate("/myrecipe")}>{recipesCount}</p>
                 </div>
                 <div className="p-6 bg-emerald-500 text-white rounded-lg shadow-md text-center">
-                    <h3 className="text-lg font-semibold">Saved Recipes</h3>
-                    <p className="text-3xl font-bold">{savedRecipes}</p>
+                    <h3 className="text-lg font-semibold">Liked Recipes</h3>
+                    <p className="text-3xl font-bold">{likedRecipes}</p>
                 </div>
                 <div className="p-6 bg-emerald-500 text-white rounded-lg shadow-md text-center">
                     <h3 className="text-lg font-semibold">Followers</h3>
