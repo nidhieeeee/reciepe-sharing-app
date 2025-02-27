@@ -30,10 +30,9 @@ function Navbar() {
                     isMenuOpen ? "flex flex-col items-center py-2" : "hidden md:flex"
                 }`}
             >
-               <li><a href="/" className=" hover:text-emerald-500">Home</a></li>
       <li><a href="/recipe" className=" hover:text-emerald-500">Recipes</a></li>
       <li><a href="/recipecreation" className=" hover:text-emerald-500">Add Recipes</a></li>
-      <li className="hidden md:block"><a href="/signup" className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Log In</a></li>
+      <li><a href="/userdashboard" className=" hover:text-emerald-500">My Dashboard</a></li>
             </ul>
         </nav>
     );

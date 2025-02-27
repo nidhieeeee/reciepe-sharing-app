@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
+import Navbar from "./Navbar";
 const recipesData = [
     {
       id: 1,
@@ -160,6 +161,7 @@ const recipesData = [
     };
 
     return (
+      <div> <Navbar />
         <div className="bg-gray-50 text-gray-900 p-6">
            {/* Page Header */}
       <h1 className="text-4xl font-bold text-center text-gray-900">Discover Recipes</h1>
@@ -250,6 +252,7 @@ const recipesData = [
                     </div>
                 </div>
             )}
+        </div>
         </div>
     );
 }

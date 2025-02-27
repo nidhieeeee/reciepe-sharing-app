@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Navbar from "./Navbar";
 export default function RecipeCreation({ existingRecipe, onSave }) {
     const [title, setTitle] = useState(existingRecipe?.title || "");
     const [description, setDescription] = useState(existingRecipe?.description || "");
@@ -59,6 +59,7 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
     };
 
     return (
+        <div><Navbar />
         <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-2xl">
             <h2 className="text-2xl font-bold mb-4">{existingRecipe ? "Edit Recipe" : "Create Recipe"}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -162,6 +163,7 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
                     {existingRecipe ? "Update Recipe" : "Create Recipe"}
                 </button>
             </form>
+        </div>
         </div>
     );
 }

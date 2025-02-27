@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 export default function UserDashboard() {
     const [recipesCount, setRecipesCount] = useState(24);
@@ -8,6 +9,7 @@ export default function UserDashboard() {
     const [followers, setFollowers] = useState(1200);
 const navigate = useNavigate();
     return (
+        <div><Navbar />
         <div className="bg-white text-gray-900 p-6">
             <h1 className="text-4xl font-bold text-center mb-10">📖 User Dashboard</h1>
 
@@ -36,6 +38,7 @@ const navigate = useNavigate();
                     <li className="border-b border-emerald-300 pb-2">🍰 Saved "Chocolate Cake" recipe</li>
                 </ul>
             </div>
+        </div>
         </div>
     );
 }

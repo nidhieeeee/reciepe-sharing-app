@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Navbar from "./Navbar";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +20,8 @@ function handleSignup(){
   };
 
   return (
+    <div>
+      <Navbar />
     <div className=" h-124 bg-gray-50 flex items-center justify-center">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
         <h2 className="text-3xl font-bold text-center text-gray-900">Login</h2>
@@ -59,6 +61,7 @@ function handleSignup(){
           </a>
         </p>
       </div>
+    </div>
     </div>
   );
 };

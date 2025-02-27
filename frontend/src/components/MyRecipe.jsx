@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Navbar from "./Navbar";
 const MyRecipes = () => {
     const navigate = useNavigate();
     const [recipes, setRecipes] = useState([
@@ -41,6 +41,7 @@ const MyRecipes = () => {
     };
 
     return (
+        <div><Navbar />
         <div className="bg-gray-50 text-gray-900 px-6 py-10">
             <h1 className="text-4xl font-bold text-center mb-6">My Recipes</h1>
 
@@ -91,6 +92,7 @@ const MyRecipes = () => {
                     ))}
                 </div>
             )}
+        </div>
         </div>
     );
 };

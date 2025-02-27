@@ -13,7 +13,6 @@ function App(){
   return(
     <div>
   <Router>
-    <Navbar />
   <Routes>
     <Route path="/" element={<Landingpage />} />
     <Route path="/login" element={<Login />} />
