@@ -24,8 +24,8 @@ const navigate = useNavigate();
                     <p className="text-3xl font-bold">{likedRecipes}</p>
                 </div>
                 <div className="p-6 bg-emerald-500 text-white rounded-lg shadow-md text-center">
-                    <h3 className="text-lg font-semibold">Followers</h3>
-                    <p className="text-3xl font-bold">{followers}</p>
+                    <h3 className="text-lg font-semibold">Personal Info</h3>
+                    <p className="text-3xl font-bold" onClick={()=>navigate("/userprofile")}>{followers}</p>
                 </div>
             </div>
 
