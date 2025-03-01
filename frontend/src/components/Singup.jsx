@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
-
-const Signup = ({setUserData}) => {
+import axios from "axios";
+const Signup = ({ setUserData }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -14,13 +14,16 @@ const Signup = ({setUserData}) => {
     bio: "",
     role: "home_cook",
   });
+
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.username || !formData.email || !formData.phone || !formData.password || !formData.confirmPassword) {
       setError("All fields are required");
@@ -32,6 +35,24 @@ const Signup = ({setUserData}) => {
     }
     setError("");
     console.log("Signing up with:", formData);
+    try{
+    
+      const response = await axios.post("http://localhost:5000/api/register" ,{
+        name: formData.name,
+        username : formData.username,
+        email : formData.email,
+        mobileNo : formData.phone,
+        password : formData.password,
+        bio : formData.bio,
+        role: formData.role,
+      });
+      console.log(response.data);
+    }
+    catch(err){
+      console.log(err);
+    }
+    
+    
     setUserData(formData);
   };
 
@@ -74,12 +95,12 @@ const Signup = ({setUserData}) => {
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Role</label>
               <select name="role" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" value={formData.role} onChange={handleChange}>
-                <option value="home_cook">Home Cook</option>
+                <option value="homeCook">Home Cook</option>
                 <option value="chef">Chef</option>
-                <option value="food_blogger">Food Blogger</option>
+                <option value="foodBlogger">Food Blogger</option>
               </select>
             </div>
-            <button type="submit" className="w-full mt-6 bg-emerald-500 text-white p-3 rounded-xl shadow-md hover:bg-emerald-600 transition" onClick={()=>navigate("/userprofile")}>
+            <button type="submit" className="w-full mt-6 bg-emerald-500 text-white p-3 rounded-xl shadow-md hover:bg-emerald-600 transition">
               Sign Up
             </button>
           </form>

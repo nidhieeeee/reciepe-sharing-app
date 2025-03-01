@@ -83,7 +83,7 @@ function Landingpage() {
 
       <div className="min-h-screen bg-gray-50 text-gray-900">
         {/* Hero Section */}
-        <section className="text-center pb-10 pt-20 bg-cover bg-center pt-65 pb-65" style={{ backgroundImage: "url('https://t4.ftcdn.net/jpg/08/49/30/61/360_F_849306138_lkQ6Y7qHUvwUi1fKGJLzb9v0Aa2FH9Al.jpg')" }}>
+        <section className="text-center pb-10 pt-20 bg-cover bg-center pt-65 pb-65" style={{ backgroundImage: "url('https://thumbs.dreamstime.com/b/variety-colorful-tomatoes-flavoring-salad-ingredients-enamelled-bowls-tasty-summer-cooking-light-wooden-back-73763310.jpg')" }}>
           <h1 className="text-5xl font-bold text-black drop-shadow-lg">Discover, Share & Cook</h1>
           <p className="text-lg text-gray-500 mt-5">Join our community and explore thousands of amazing recipes</p>
           <button className="mt-10 px-12 py-6 bg-emerald-500 text-2xl text-white rounded-2xl shadow-md hover:bg-emerald-700 cursor-pointer" onClick={handleLogin}>Get Started</button>
