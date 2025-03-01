@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Landingpage from "./components/Landingpage";
-import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Signup from "./components/Singup";
 import Recipe from "./components/Recipe";
@@ -25,7 +24,6 @@ function App(){
     <Route path="/myrecipe" element={<MyRecipes />} />
     <Route path="/userprofile" element={<UserProfile data={userData} />} />
   </Routes>
-  <Footer />
 </Router>
     </div>
   );

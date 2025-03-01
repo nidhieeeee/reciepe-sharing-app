@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -9,20 +10,33 @@ const navigate = useNavigate();
 function handleSignup(){
   navigate("/signup");
 }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Both fields are required");
       return;
     }
     setError("");
+
+    //here we have to do same thing as signup just change the path to /login
+    //everything else is done remove all fields only keep email and done? yeah done now run and send ss of console
+
+    try{
+    
+      const response = await axios.post("http://localhost:5000/api/login" ,{
+          email : email,
+          password:password
+      }); 
+      console.log(response.data);
+    }
+    catch(err){
+      console.log(err);
+    }
     console.log("Logging in with:", email, password);
   };
 
   return (
-    <div>
-      <Navbar />
-    <div className=" h-124 bg-gray-50 flex items-center justify-center">
+    <div className=" h-155 bg-gray-50 flex items-center justify-center">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
         <h2 className="text-3xl font-bold text-center text-gray-900">Login</h2>
         {error && <p className="mt-2 text-red-500 text-center">{error}</p>}
@@ -61,7 +75,6 @@ function handleSignup(){
           </a>
         </p>
       </div>
-    </div>
     </div>
   );
 };

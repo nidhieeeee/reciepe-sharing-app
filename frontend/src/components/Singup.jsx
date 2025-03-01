@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
 import axios from "axios";
 const Signup = ({ setUserData }) => {
   const navigate = useNavigate();
@@ -54,15 +53,14 @@ const Signup = ({ setUserData }) => {
     
     
     setUserData(formData);
+    navigate("/login");
   };
 
   return (
-    <div>
-      <Navbar />
       <div className="bg-gray-50 flex items-center justify-center min-h-screen">
         <div className="w-full max-w-lg bg-white p-8 rounded-2xl shadow-2xl">
           <h2 className="text-3xl font-bold text-center text-gray-900">Sign Up</h2>
-          {error && <p className="mt-2 text-red-500 text-center">{error}</p>}
+          
           <form onSubmit={handleSubmit} className="mt-6">
             <div>
               <label className="block text-gray-700 font-medium">Full Name</label>
@@ -100,16 +98,16 @@ const Signup = ({ setUserData }) => {
                 <option value="foodBlogger">Food Blogger</option>
               </select>
             </div>
-            <button type="submit" className="w-full mt-6 bg-emerald-500 text-white p-3 rounded-xl shadow-md hover:bg-emerald-600 transition">
+            <button type="submit" className="w-full mt-6 bg-emerald-500 text-white p-3 rounded-xl shadow-md hover:bg-emerald-600 transition" >
               Sign Up
             </button>
+            {error && <p className="mt-2 text-red-500 text-center">{error}</p>}
           </form>
           <p className="mt-4 text-center text-gray-600">
             Already have an account? <span className="text-emerald-900 hover:underline cursor-pointer" onClick={() => navigate("/login")}>Login</span>
           </p>
         </div>
       </div>
-    </div>
   );
 };
 

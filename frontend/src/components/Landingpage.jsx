@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Cherry } from 'lucide-react';
+import Footer from "./Footer.jsx"
 function Landingpage() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -192,6 +193,7 @@ function Landingpage() {
 
 
       </div>
+      <Footer />
     </div>
 
   );
