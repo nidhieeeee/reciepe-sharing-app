@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 const recipesData = [
     {
       id: 1,
@@ -253,6 +254,7 @@ const recipesData = [
                 </div>
             )}
         </div>
+<Footer />
         </div>
     );
 }

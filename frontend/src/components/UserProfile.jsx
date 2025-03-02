@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { Mail, Phone, User, Info, UserCheck } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
-function UserProfile({ data }) {
+function UserProfile({data}) {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -60,6 +61,7 @@ function UserProfile({ data }) {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

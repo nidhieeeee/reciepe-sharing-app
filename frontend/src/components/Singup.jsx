@@ -57,42 +57,42 @@ const Signup = ({ setUserData }) => {
   };
 
   return (
-      <div className="bg-gray-50 flex items-center justify-center min-h-screen">
+      <div className="bg-emerald-45 flex items-center justify-center min-h-screen">
         <div className="w-full max-w-lg bg-white p-8 rounded-2xl shadow-2xl">
           <h2 className="text-3xl font-bold text-center text-gray-900">Sign Up</h2>
           
           <form onSubmit={handleSubmit} className="mt-6">
             <div>
               <label className="block text-gray-700 font-medium">Full Name</label>
-              <input type="text" name="name" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" placeholder="Enter your name" value={formData.name} onChange={handleChange} />
+              <input type="text" name="name" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Enter your name" value={formData.name} onChange={handleChange} />
             </div>
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Username</label>
-              <input type="text" name="username" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" placeholder="Choose a username" value={formData.username} onChange={handleChange} />
+              <input type="text" name="username" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Choose a username" value={formData.username} onChange={handleChange} />
             </div>
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Email</label>
-              <input type="email" name="email" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" placeholder="Enter your email" value={formData.email} onChange={handleChange} />
+              <input type="email" name="email" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Enter your email" value={formData.email} onChange={handleChange} />
             </div>
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Phone Number</label>
-              <input type="tel" name="phone" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} />
+              <input type="tel" name="phone" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} />
             </div>
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Password</label>
-              <input type="password" name="password" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" placeholder="Enter your password" value={formData.password} onChange={handleChange} />
+              <input type="password" name="password" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Enter your password" value={formData.password} onChange={handleChange} />
             </div>
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Confirm Password</label>
-              <input type="password" name="confirmPassword" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleChange} />
+              <input type="password" name="confirmPassword" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleChange} />
             </div>
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Short Bio</label>
-              <textarea name="bio" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" placeholder="Tell us about yourself" value={formData.bio} onChange={handleChange}></textarea>
+              <textarea name="bio" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" placeholder="Tell us about yourself" value={formData.bio} onChange={handleChange}></textarea>
             </div>
             <div className="mt-4">
               <label className="block text-gray-700 font-medium">Role</label>
-              <select name="role" className="w-full p-3 mt-1 border rounded-xl focus:ring-emerald-500" value={formData.role} onChange={handleChange}>
+              <select name="role" className="w-full p-3 mt-1 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500" value={formData.role} onChange={handleChange}>
                 <option value="homeCook">Home Cook</option>
                 <option value="chef">Chef</option>
                 <option value="foodBlogger">Food Blogger</option>

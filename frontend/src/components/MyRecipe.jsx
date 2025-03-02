@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 const MyRecipes = () => {
     const navigate = useNavigate();
     const [recipes, setRecipes] = useState([
@@ -93,6 +94,7 @@ const MyRecipes = () => {
                 </div>
             )}
         </div>
+        <Footer />
         </div>
     );
 };

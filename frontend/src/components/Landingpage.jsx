@@ -77,7 +77,7 @@ function Landingpage() {
           <li><a href="#trending" className=" hover:text-emerald-500">Trending recipes</a></li>
           <li><a href="#works" className=" hover:text-emerald-500">How it works</a></li>
           <li><a href="#reviews" className=" hover:text-emerald-500">Reviews</a></li>
-          <li className="hidden md:block"><a href="/signup" className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Log In</a></li>
+          <li className="hidden md:block"><a href="/signup" className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Sign up</a></li>
         </ul>
       </nav>
 

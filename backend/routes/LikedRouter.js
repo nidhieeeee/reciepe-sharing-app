@@ -22,3 +22,8 @@ router.get("/:id" , async(req,res)=>{
     const likedrecipe = await likedRecipe.findById(req.params.id);
     res.json(likedrecipe);
 })
+// is it okay??  lets..
+ 
+//yeahhh everything is okkkk now letssssss create authMiddleware
+
+//create a folder named middleware then create a file named authMiddleware.js?

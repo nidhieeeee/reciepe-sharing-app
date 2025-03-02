@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 const JWT_SECRET = "thisismysamplejwtsecreticankeeepitaslargeasiwantanythingicanwritehereS"
 const jwt = require("jsonwebtoken");
 
+
+
 router.post("/register", async (req, res) => {
     try {
 
@@ -64,7 +66,8 @@ router.post("/login", async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ error: "incorrect password" });
         }
-        const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: "1h" })
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" })
+        res.cookie('token', token, {httpOnly:true,secure:true,maxAge:360000});
         res.json({ token, userId: user._id });
     } catch (err) {
         return res.status(500).json({ err: `${err}` })
