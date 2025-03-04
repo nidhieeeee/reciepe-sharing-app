@@ -24,8 +24,6 @@ function handleSignup(){
           password:password
       }); 
       console.log(response.data);
-      const data = await response.json();
-      localStorage.setItem("token", data.token); 
     }
     catch(err){
       console.log(err);

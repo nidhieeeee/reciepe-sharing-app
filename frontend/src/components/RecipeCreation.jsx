@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import axios from "axios";
 
 export default function RecipeCreation({ existingRecipe, onSave }) {
     const [title, setTitle] = useState(existingRecipe?.title || "");
@@ -11,7 +12,6 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(existingRecipe?.image || "");
 
-    // Handle ingredient input changes
     const updateIngredient = (index, value) => {
         const newIngredients = [...ingredients];
         newIngredients[index] = value;
@@ -21,7 +21,6 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
     const addIngredient = () => setIngredients([...ingredients, ""]);
     const removeIngredient = (index) => setIngredients(ingredients.filter((_, i) => i !== index));
 
-    // Handle step input changes
     const updateStep = (index, value) => {
         const newSteps = [...steps];
         newSteps[index] = value;
@@ -31,7 +30,6 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
     const addStep = () => setSteps([...steps, ""]);
     const removeStep = (index) => setSteps(steps.filter((_, i) => i !== index));
 
-    // Handle image upload and preview
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -42,7 +40,6 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
         }
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -58,21 +55,19 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
         if (image) {
             formData.append("image", image);
         }
-        const token = localStorage.getItem("token");
-
         if (!token) {
             alert("You must be logged in to create a recipe.");
             return;
         }
         
         try {
-            const response = await fetch("http://localhost:5000/api/recipes/createRecipe", {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+            const response = await axios.post("http://localhost:5000/api/recipes/createRecipe" , 
+                formData , {withCredentials:true , 
+                    headers:{
+                        "Content-Type" : "multipart/formData",
+                    }
                 }
-            });
+            )
 
             const data = await response.json();
 
