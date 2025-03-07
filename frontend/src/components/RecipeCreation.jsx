@@ -52,31 +52,24 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
         formData.append("category", category);
         formData.append("ingredients", JSON.stringify(filteredIngredients)); 
         formData.append("steps", JSON.stringify(filteredSteps)); 
-        if (image) {
+        if (image) { 
             formData.append("image", image);
-        }
-        if (!token) {
-            alert("You must be logged in to create a recipe.");
-            return;
-        }
-        
+        }        
         try {
-            const response = await axios.post("http://localhost:5000/api/recipes/createRecipe" , 
-                formData , {withCredentials:true , 
-                    headers:{
-                        "Content-Type" : "multipart/formData",
+            
+            const response = await axios.post("http://localhost:5000/api/recipes/createRecipe" ,
+                formData , {withCredentials:true ,  
+                    headers:{ 
+                        "Content-Type" : "multipart/formData", 
                     }
                 }
-            )
-
-            const data = await response.json();
-
-            if (response.ok) {
+            ) 
                 alert("Recipe Created Successfully!");
-                onSave(data);
-            } else {
-                alert(data.error || "Something went wrong");
-            }
+                onSave(response.data);
+            
+
+            //we dont need if else as its already try catch so it theres any error it will be handled by catch gotit!!
+            //otherwise its always success
         } catch (error) {
             console.error("Error creating recipe:", error);
             alert("Failed to create recipe. Please try again.");

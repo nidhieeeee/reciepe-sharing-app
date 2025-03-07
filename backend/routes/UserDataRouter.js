@@ -2,7 +2,6 @@ const express = require("express");
 const userData = require("../models/userData")
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const JWT_SECRET = "thisismysamplejwtsecreticankeeepitaslargeasiwantanythingicanwritehereS"
 const jwt = require("jsonwebtoken");
 
 

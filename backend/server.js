@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
-//project mai .env to laga di idhar initialize kon karega m-ereko ni pata tha -- _ -- chal abhi likh  kiyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-//
+
+// 
+
 
 const app = express();
 app.use(cors({

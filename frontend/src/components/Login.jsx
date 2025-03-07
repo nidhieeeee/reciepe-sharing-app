@@ -18,19 +18,17 @@ function handleSignup(){
     }
     setError("");
     try{
-      
       const response = await axios.post("http://localhost:5000/api/login" ,{
           email : email,
-          password:password
+          password:password 
       }); 
       console.log(response.data);
+      console.log("Logging in with:", email, password);
+      navigate("/recipe");
     }
     catch(err){
-      console.log(err);
+      console.log(err); 
     }
-    console.log("Logging in with:", email, password);
-    
-    navigate("/recipe");
   };
 
   return (
