@@ -34,15 +34,15 @@ function handleSignup(){
   return (
     <div className="flex h-screen bg-emerald-45">
     {/* Left Side - Logo and Name */}
-    <div className="w-1/2 flex flex-col justify-center items-center ">
+    <div className="w-full md:w-1/2  flex flex-col justify-center items-center ">
       <Cherry size={300} strokeWidth={1} className="text-emerald-700" />
       <h1 className="text-4xl font-bold text-emerald-700"><i>Lush <strong>Bites</strong></i></h1>
     </div>
 
     {/* Right Side - Login Form */}
    
-    <div className="w-1/2 flex flex-col justify-center  p-8">
-    <div className="w-1/2 flex flex-col justify-center items-center">
+    <div className="w-full md:w-1/2  flex flex-col justify-center  p-8">
+    <div className="w-full md:w-1/2 flex flex-col justify-center items-center">
       <h2 className="text-3xl font-semibold mb-6">Login</h2>
       {error && <p className="mt-2 text-red-500 text-center">{error}</p>}
       <form onSubmit={handleSubmit} className="w-full max-w-sm">

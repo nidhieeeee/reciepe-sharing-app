@@ -9,8 +9,8 @@ logs/
 *.log
 # Environment Variables
 .env
-frontend/.env
-backend/.env
+/frontend/.env
+/backend/.env
 # Build Files
 dist/
 build/
