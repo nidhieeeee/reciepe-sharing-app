@@ -10,6 +10,7 @@ app.use(cors({
    credentials: true 
 }));
 app.use(express.json());
+app.use(cookieParser()); 
 
 const PORT = 5000;
 
@@ -17,10 +18,10 @@ const userDataRoutes = require("./routes/UserDataRouter");
 const recipeDataRoutes = require("./routes/RecipeRoutes");
 app.use("/api", userDataRoutes);
 app.use("/api/recipes" , recipeDataRoutes);
-app.use(cookieParser());
 
 
-mongoose.connect("mongodb://localhost:27017/userData").then(()=> console.log("MongoDB connected")).catch(err => console.log(err));
+
+mongoose.connect(process.env.MONGO_URI).then(()=> console.log("MongoDB connected")).catch(err => console.log(err));
  app.listen(PORT,()=>{
     console.log("App is running on port 5000");
  });

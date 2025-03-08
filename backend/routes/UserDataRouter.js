@@ -66,7 +66,12 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ error: "incorrect password" });
         }
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" })
-        res.cookie('token', token, {httpOnly:true,maxAge:360000});
+        res.cookie('token', token, {
+            httpOnly:true,
+            maxAge:3600000,
+            sameSite:"lax",
+            secure : process.env.NODE_ENV === "production"
+        });
         res.json({ token, userId: user._id });
     } catch (err) {
         return res.status(500).json({ err: `${err}` })

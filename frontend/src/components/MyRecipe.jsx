@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import axios from "axios";
 const MyRecipes = () => {
     const navigate = useNavigate();
+
+
     const [recipes, setRecipes] = useState([
         {
             id: 1,
@@ -34,8 +37,24 @@ const MyRecipes = () => {
             ],
         }
     ]);
-
-    // Function to remove a recipe
+useEffect(()=>{
+    
+        const fetchMyRecipe = async () =>{
+            try {
+            const response = await axios.get("http://localhost:5000/api/recipes/myRecipe",
+                {
+                    withCredentials:true
+                }
+            )
+            setRecipes(response.data)
+        
+    } catch (err) {
+        console.log(err);
+    }
+}
+        fetchMyRecipe();
+    
+},[])
     const removeRecipe = (id) => {
         const updatedRecipes = recipes.filter(recipe => recipe.id !== id);
         setRecipes(updatedRecipes);

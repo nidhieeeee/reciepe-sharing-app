@@ -45,31 +45,51 @@ export default function RecipeCreation({ existingRecipe, onSave }) {
 
         const filteredIngredients = ingredients.filter(ingredient => ingredient.trim() !== "");
         const filteredSteps = steps.filter(step => step.trim() !== "");
+        
+        let imageUrl = ""; 
 
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("category", category);
-        formData.append("ingredients", JSON.stringify(filteredIngredients)); 
-        formData.append("steps", JSON.stringify(filteredSteps)); 
-        if (image) { 
-            formData.append("image", image);
-        }        
+        if (image) {
+            
+            const imageData = new FormData();
+            imageData.append("file", image);
+            imageData.append('upload_preset', import.meta.env.VITE_CLOUDINARY_UPLOADS_PRESETS);
+            imageData.append('cloud_name', import.meta.env.VITE_CLOUDINARY_CLOUD_NAME);
+
+            const cloudname = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+           
+    
+            try {
+                const cloudinaryResponse = await axios.post(
+                    `https://api.cloudinary.com/v1_1/${cloudname}/image/upload`, 
+                    imageData
+                );
+                imageUrl = cloudinaryResponse.data.secure_url;
+                console.log("Image uploaded to Cloudinary:", imageUrl);
+            } catch (error) {
+                console.error("Error uploading image:", error);
+                alert("Failed to upload image.");
+                return;
+            }
+        }
+
+        const formData = {
+            title:title,
+            description:description,
+            category:category,
+            ingredients:ingredients,
+            steps:steps,
+            image:imageUrl,
+        }
         try {
             
             const response = await axios.post("http://localhost:5000/api/recipes/createRecipe" ,
-                formData , {withCredentials:true ,  
-                    headers:{ 
-                        "Content-Type" : "multipart/formData", 
-                    }
-                }
+                formData
+                 , {
+                    withCredentials:true,
+                 }
             ) 
                 alert("Recipe Created Successfully!");
-                onSave(response.data);
-            
-
-            //we dont need if else as its already try catch so it theres any error it will be handled by catch gotit!!
-            //otherwise its always success
+                
         } catch (error) {
             console.error("Error creating recipe:", error);
             alert("Failed to create recipe. Please try again.");
