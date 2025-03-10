@@ -9,7 +9,7 @@ function Landingpage() {
 
   const StarRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 !== 0; // Check for half star
+    const halfStar = rating % 1 !== 0; 
     return (
       <div className="flex items-center text-yellow-500">
         {[...Array(fullStars)].map((_, i) => (

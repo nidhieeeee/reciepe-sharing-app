@@ -25,9 +25,6 @@ function handleSignup(){
       {
         withCredentials: true 
       }
- 
-      //here add an object withCredentials: true OBJECT {} done!>.<  nowwwww try running the login and check cookies send me ss when done
-    
     ); 
       console.log(response.data);
       console.log("Logging in with:", email, password);

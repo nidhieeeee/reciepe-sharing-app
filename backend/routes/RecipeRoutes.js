@@ -3,16 +3,6 @@ const router = express.Router();
 const multer = require("multer");
 const Recipe = require("../models/recipeData");
 const auth = require("../middleware/authMiddleware")
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => cb(null, "uploads/"),
-//     filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname)
-
-// })wooohooooo!!!!!! oki bruh failed to create bata rhe ammmm screenshot bhej to
-
-// const upload = multer({ storage }); done! now create recipe using form
-
-
-
 router.post("/createRecipe", auth, async (req, res) => {
     try {
         const { title, description, category, ingredients, steps, image } = req.body;
