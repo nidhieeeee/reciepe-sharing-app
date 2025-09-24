@@ -22,6 +22,7 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/recipeApp'
 app.use(
   cors({
     origin: 'https://lushbites.nidhieeeee.codes',
+    credentials: true,
   })
 );
 app.use(express.json());
