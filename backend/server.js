@@ -5,9 +5,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 // Import Routes & Models
-const authRoutes = require('./routes/authRoutes');
-const recipeRoutes = require('./routes/recipeRoutes');
-const aiRoutes = require('./routes/aiModelRoutes');
+const authRoutes = require('./routes/authRoutes.js');
+const recipeRoutes = require('./routes/recipeRoutes.js');
+const aiRoutes = require('./routes/aiModelRoutes.js');
 const User = require('./models/User');
 const Recipe = require('./models/Recipe');
 
