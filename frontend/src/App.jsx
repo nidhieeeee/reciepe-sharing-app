@@ -9,12 +9,14 @@ import {BrowserRouter as Router , Routes , Route } from "react-router-dom";
 import MyRecipes from "./components/MyRecipe";
 import UserProfile from "./components/UserProfile";
 import RecipeDetail from "./components/RecipeDetails";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App(){
   const [userData,setUserData] = useState([]);
 
   return(
     <div>
+<ScrollToTop />
   <Router>
   <Routes>
     <Route path="/" element={<Landingpage />} />
