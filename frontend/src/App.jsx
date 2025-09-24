@@ -16,8 +16,9 @@ function App(){
 
   return(
     <div>
-<ScrollToTop />
+
   <Router>
+    <ScrollToTop />
   <Routes>
     <Route path="/" element={<Landingpage />} />
     <Route path="/login" element={<Login />} />
