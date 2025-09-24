@@ -1,74 +1,22 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const multer = require("multer");
-const Recipe = require("../models/recipeData");
-const auth = require("../middleware/authMiddleware")
-router.post("/createRecipe", auth, async (req, res) => {
-    try {
-        const { title, description, category, ingredients, steps, image } = req.body;
-        
+const recipeController = require('../controllers/recipeController');
+const authMiddleware = require('../middlewares/authMiddleware');
+// const jsonData = require('../../data/recipeApp.recipes.json')
+const Recipe = require('../models/Recipe'); 
 
-        const newRecipe = new Recipe({
-            userid: req.user.id,
-            title,
-            description,
-            category,
-            ingredients: ingredients,
-            steps:steps,
-            image: image,
-        })
+// Create recipe
+router.post('/', authMiddleware, recipeController.createRecipe);
 
-        await newRecipe.save();
-        res.status(201).json(newRecipe);
-    }
+// Get user recipes
+router.get('/my-recipes', authMiddleware, recipeController.getUserRecipes);
 
-    catch (err) {
-        console.log(err);
-        res.status(500).json({ error: err.message });
-    }
+// Get all recipes
+router.get('/', recipeController.getAllRecipes);
 
-})
+// Get single recipe
+router.get('/:id', recipeController.getRecipeById);
 
 
-router.get("/allRecipe", async (req, res) => {
-    const recipes = await Recipe.find();
-    res.json(recipes)
-})
 
-router.get("/myRecipe", auth, async (req, res) => {
-
-    try {
-        const id = req.user.id;
-        const myRecipes = await Recipe.find({ userid: id });
-        res.json(myRecipes);
-    } catch (error) {
-        res.status(500).json({ error: `${error}` });
-    }
-})
-router.get("/:id", async (req, res) => {
-    const recipe = await Recipe.findById(req.params.id);
-
-    res.json(recipe);
-})
-
-router.delete("/:id", auth, async (req, res) => {
-    let recipe = await Recipe.findById(req.params.id);
-
-    if (!recipe) {
-        return res.status(400).json({ message: "Recipe not found!" })
-
-    }
-    if (recipe.userid.toString() != req.user.id) {
-        return res.status(403).json({ message: "not authorized" })
-    }
-    await Recipe.findByIdAndDelete(req.params.id);
-    res.json({ message: "recipe deleted!!" });
-})
 module.exports = router;
-
-
-
-
-
-
-

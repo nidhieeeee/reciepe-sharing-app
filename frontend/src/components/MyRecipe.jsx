@@ -3,120 +3,155 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
+import { PlusCircle, BookOpen, Trash2 } from 'lucide-react';
+
+// A Skeleton Loader for a consistent loading experience
+const RecipeCardSkeleton = () => (
+    <div className="bg-white rounded-2xl shadow-lg animate-pulse">
+        <div className="w-full h-48 bg-slate-200 rounded-t-2xl"></div>
+        <div className="p-5">
+            <div className="h-6 w-3/4 bg-slate-200 rounded mb-3"></div>
+            <div className="h-4 w-full bg-slate-200 rounded"></div>
+            <div className="h-4 w-1/2 bg-slate-200 rounded mt-2"></div>
+        </div>
+    </div>
+);
+
+
 const MyRecipes = () => {
     const navigate = useNavigate();
+    const [recipes, setRecipes] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
 
-    const [recipes, setRecipes] = useState([
-        {
-            id: 1,
-            title: "Paneer Butter Masala",
-            description: "Creamy and rich paneer curry cooked in a tomato-based gravy.",
-            image: "https://media.istockphoto.com/id/1292629539/photo/paneer-tikka-masala-is-a-famous-indian-dish-served-over-a-rustic-wooden-background-selective.jpg?s=612x612&w=0&k=20&c=GCvoJ3lBcvvRJmeENmSpa_7rLkh_1OKPaM6gKNYqUGM=",
-            category: "Main Course",
-            ingredients: ["Paneer", "Tomatoes", "Cream", "Butter", "Garam Masala"],
-            steps: [
-                "Sauté onions, tomatoes, and spices in butter.",
-                "Blend into a smooth paste and cook with cream.",
-                "Add paneer cubes and simmer until soft.",
-                "Garnish with coriander and serve hot."
-            ],
-        },
-        {
-            id: 2,
-            title: "Dal Tadka",
-            description: "Lentils cooked with a flavorful tempering of garlic and spices.",
-            image: "https://www.shutterstock.com/image-photo/indian-dal-traditional-soup-lentils-600nw-1312092353.jpg",
-            category: "Main Course",
-            ingredients: ["Toor Dal", "Garlic", "Tomatoes", "Mustard Seeds", "Ghee"],
-            steps: [
-                "Cook toor dal until soft.",
-                "Prepare tempering with ghee, garlic, mustard seeds, and spices.",
-                "Pour over dal and mix well.",
-                "Serve with steamed rice."
-            ],
-        }
-    ]);
-useEffect(()=>{
-    
-        const fetchMyRecipe = async () =>{
+    // --- Fetch User's Recipes from the Backend ---
+    useEffect(() => {
+        const fetchMyRecipes = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                navigate("/login");
+                return;
+            }
+            
             try {
-            const response = await axios.get("http://localhost:5000/api/recipes/myRecipe",
-                {
-                    withCredentials:true
+                setLoading(true);
+                const headers = { Authorization: `Bearer ${token}` };
+                const response = await axios.get(
+                    `${apiBaseUrl}/api/recipes/my-recipes`, 
+                    { headers }
+                );
+                setRecipes(response.data.recipes || []);
+            } catch (err) {
+                console.error("Error fetching my recipes:", err);
+                setError("Failed to load recipes. Please try logging in again.");
+                if (err.response && err.response.status === 401) {
+                    navigate("/login");
                 }
-            )
-            setRecipes(response.data)
-        
-    } catch (err) {
-        console.log(err);
-    }
-}
-        fetchMyRecipe();
-    
-},[])
-    const removeRecipe = (id) => {
-        const updatedRecipes = recipes.filter(recipe => recipe.id !== id);
-        setRecipes(updatedRecipes);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMyRecipes();
+    }, [apiBaseUrl, navigate]);
+
+    // --- Handle Recipe Deletion ---
+    const handleRemoveRecipe = async (recipeId, e) => {
+        e.stopPropagation(); // Prevent the card's onClick from firing
+
+        if (window.confirm("Are you sure you want to delete this recipe?")) {
+            try {
+                const token = localStorage.getItem("token");
+                await axios.delete(`${apiBaseUrl}/api/recipes/${recipeId}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                // Remove the recipe from the state for an immediate UI update
+                setRecipes(prevRecipes => prevRecipes.filter(recipe => recipe._id !== recipeId));
+            } catch (err) {
+                console.error("Error deleting recipe:", err);
+                alert("Failed to delete recipe. Please try again.");
+            }
+        }
     };
 
     return (
-        <div><Navbar />
-        <div className="bg-gray-50 text-gray-900 px-6 py-10">
-            <h1 className="text-4xl font-bold text-center mb-6">My Recipes</h1>
-
-            {recipes.length === 0 ? (
-                <p className=" h-88 text-center text-gray-600 text-lg">No recipes found.</p>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-                    {recipes.map((recipe) => (
-                        <div
-                            key={recipe.id}
-                            className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition"
-                        >
-                            <img
-                                className="w-full h-48 object-cover"
-                                src={recipe.image}
-                                alt={recipe.title}
-                            />
-                            <div className="p-4">
-                                <h3 className="text-xl font-semibold">{recipe.title}</h3>
-                                <p className="text-gray-600 mt-2 line-clamp-2">
-                                    {recipe.description}
-                                </p>
-                                <p className="mt-2 text-sm text-gray-500">
-                                    <span className="font-semibold">Ingredients:</span> {recipe.ingredients.join(", ")}
-                                </p>
-                                <h3 className="mt-4 font-semibold text-lg">Steps:</h3>
-                                <ol className="list-decimal pl-5 mt-2 text-gray-700">
-                                    {recipe.steps.map((step, index) => (
-                                        <li key={index}>{step}</li>
-                                    ))}
-                                </ol>
-                                <div className="mt-4 flex justify-between">
+        <div className="min-h-screen bg-slate-100 font-sans">
+            <Navbar />
+            <main className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                {/* --- Page Header --- */}
+                <header className="flex flex-col sm:flex-row justify-between items-center mb-10 pb-4 border-b border-slate-200">
+                    <div>
+                        <h1 className="text-4xl font-bold text-slate-800 tracking-tight">My Creations</h1>
+                        <p className="mt-2 text-slate-500">A collection of all the recipes you've shared.</p>
+                    </div>
+                    <button 
+                        onClick={() => navigate("/recipecreation")}
+                        className="mt-4 sm:mt-0 inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold py-2 px-5 rounded-lg hover:bg-emerald-700 transition-transform hover:scale-105 shadow-md">
+                        <PlusCircle size={20} />
+                        Add New Recipe
+                    </button>
+                </header>
+                
+                {error && <p className="text-center text-red-500">{error}</p>}
+                
+                {/* --- Content Grid --- */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {loading ? (
+                        // --- Loading State: Show Skeletons ---
+                        Array.from({ length: 3 }).map((_, index) => <RecipeCardSkeleton key={index} />)
+                    ) : recipes.length === 0 && !error ? (
+                        // --- Empty State ---
+                        <div className="col-span-full text-center py-20 bg-white rounded-2xl shadow-md">
+                            <BookOpen className="mx-auto h-16 w-16 text-slate-400" />
+                            <h3 className="mt-4 text-xl font-semibold text-slate-700">No Recipes Yet</h3>
+                            <p className="mt-2 text-slate-500">Looks like you haven't created any recipes. Let's change that!</p>
+                            <button
+                                onClick={() => navigate("/recipecreation")}
+                                className="mt-6 inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold py-2 px-5 rounded-lg hover:bg-emerald-700 transition-transform hover:scale-105"
+                            >
+                                <PlusCircle size={20} />
+                                Create Your First Recipe
+                            </button>
+                        </div>
+                    ) : (
+                        // --- Recipe List ---
+                        recipes.map((recipe) => (
+                            <div
+                                key={recipe._id}
+                                className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group cursor-pointer"
+                                onClick={() => navigate(`/recipe/${recipe._id}`)}
+                            >
+                                <div className="relative">
+                                    <img
+                                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                                        src={recipe.image}
+                                        alt={recipe.title}
+                                    />
+                                    {/* --- REMOVE BUTTON (view only, no edit) --- */}
                                     <button
-                                        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-                                        onClick={() => navigate("/recipecreation")}
+                                        onClick={(e) => handleRemoveRecipe(recipe._id, e)}
+                                        className="absolute top-3 right-3 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 hover:scale-110"
+                                        aria-label="Remove Recipe"
                                     >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-                                        onClick={() => removeRecipe(recipe.id)}
-                                    >
-                                        Remove
+                                        <Trash2 size={18} />
                                     </button>
                                 </div>
+                                <div className="p-5">
+                                    <h3 className="text-xl font-bold text-slate-800 truncate group-hover:text-emerald-700">{recipe.title}</h3>
+                                    <p className="text-sm text-slate-500 mt-2 h-10 overflow-hidden line-clamp-2">
+                                        {recipe.description}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </div>
-            )}
-        </div>
-        <Footer />
+            </main>
+            <Footer />
         </div>
     );
 };
 
 export default MyRecipes;
-

@@ -8,6 +8,8 @@ import UserDashboard from "./components/UserDashboard";
 import {BrowserRouter as Router , Routes , Route } from "react-router-dom";
 import MyRecipes from "./components/MyRecipe";
 import UserProfile from "./components/UserProfile";
+import RecipeDetail from "./components/RecipeDetails";
+
 function App(){
   const [userData,setUserData] = useState([]);
 
@@ -19,6 +21,7 @@ function App(){
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup setUserData={setUserData}/>} />
     <Route path="/recipe" element={<Recipe />} />
+    <Route path="/recipe/:id" element={<RecipeDetail />} />
     <Route path="/recipecreation" element={<RecipeCreation />} />
     <Route path="/userdashboard" element={<UserDashboard />} />
     <Route path="/myrecipe" element={<MyRecipes />} />
