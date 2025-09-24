@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 // Import Routes & Models
 const authRoutes = require('./routes/authRoutes.js');
-const recipeRoutes = require('./routes/recipeRoutes.js');
+const recipeRoutes = require('./routes/RecipeRoutes.js');
 const aiRoutes = require('./routes/aiModelRoutes.js');
 const User = require('./models/User');
 const Recipe = require('./models/Recipe');
