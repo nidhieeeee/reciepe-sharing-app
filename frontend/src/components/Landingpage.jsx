@@ -81,33 +81,106 @@ function LandingPage() {
     );
   };
 
-  const trendingRecipes = [
-    { id: 1, title: "Truffle Risotto", description: "Luxurious Italian risotto...", image: "...", rating: 4.9, cookTime: "45 min", difficulty: "Advanced", chef: "Marco Rossi" },
-    { id: 2, title: "Avocado Toast Supreme", description: "Gourmet avocado toast...", image: "...", rating: 4.7, cookTime: "15 min", difficulty: "Easy", chef: "Sarah Chen" },
-    { id: 3, title: "Berry Acai Bowl", description: "Antioxidant-rich smoothie bowl...", image: "...", rating: 4.8, cookTime: "10 min", difficulty: "Easy", chef: "Emma Wilson" },
-    { id: 4, title: "Wagyu Steak", description: "Premium wagyu steak...", image: "...", rating: 4.9, cookTime: "30 min", difficulty: "Advanced", chef: "David Kim" }
-  ];
+const trendingRecipes = [
+  {
+    id: 1,
+    title: "Truffle Risotto",
+    description: "Luxurious Italian risotto with black truffle and parmesan.",
+    image: "https://images.pexels.com/photos/4518843/pexels-photo-4518843.jpeg?auto=compress&cs=tinysrgb&w=800",
+    rating: 4.9,
+    cookTime: "45 min",
+    difficulty: "Advanced",
+    chef: "Marco Rossi"
+  },
+  {
+    id: 2,
+    title: "Avocado Toast Supreme",
+    description: "Gourmet avocado toast with poached egg and microgreens.",
+    image: "https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=800",
+    rating: 4.7,
+    cookTime: "15 min",
+    difficulty: "Easy",
+    chef: "Sarah Chen"
+  },
+  {
+    id: 3,
+    title: "Berry Acai Bowl",
+    description: "Antioxidant-rich smoothie bowl with fresh berries and granola.",
+    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+    rating: 4.8,
+    cookTime: "10 min",
+    difficulty: "Easy",
+    chef: "Emma Wilson"
+  },
+  {
+    id: 4,
+    title: "Wagyu Steak",
+    description: "Premium wagyu steak with herb butter and roasted vegetables.",
+    image: "https://images.pexels.com/photos/3535383/pexels-photo-3535383.jpeg?auto=compress&cs=tinysrgb&w=800",
+    rating: 4.9,
+    cookTime: "30 min",
+    difficulty: "Advanced",
+    chef: "David Kim"
+  }
+];
 
-  const features = [
-    { icon: <Users className="w-6 h-6 md:w-8 md:h-8" />, title: "Join Community", description: "Connect with passionate chefs...", step: "01" },
-    { icon: <BookOpen className="w-6 h-6 md:w-8 md:h-8" />, title: "Share Recipes", description: "Upload your favorite recipes...", step: "02" },
-    { icon: <Search className="w-6 h-6 md:w-8 md:h-8" />, title: "Discover & Save", description: "Find amazing recipes and save them...", step: "03" },
-    { icon: <ChefHat className="w-6 h-6 md:w-8 md:h-8" />, title: "Cook & Connect", description: "Try new recipes and share...", step: "04" }
-  ];
+const features = [
+  { 
+    icon: <Users className="w-6 h-6 md:w-8 md:h-8" />, 
+    title: "Join a Global Community", 
+    description: "Connect with a diverse family of passionate home cooks, professional chefs, and food lovers from all around the world.", 
+    step: "01" 
+  },
+  { 
+    icon: <BookOpen className="w-6 h-6 md:w-8 md:h-8" />, 
+    title: "Share Your Creations", 
+    description: "Easily upload your own favorite recipes, complete with stunning photos, detailed ingredient lists, and step-by-step instructions.", 
+    step: "02" 
+  },
+  { 
+    icon: <Search className="w-6 h-6 md:w-8 md:h-8" />, 
+    title: "Discover & Save", 
+    description: "Explore thousands of unique dishes, from timeless classics to modern marvels, and save them to your personal digital cookbook.", 
+    step: "03" 
+  },
+  { 
+    icon: <ChefHat className="w-6 h-6 md:w-8 md:h-8" />, 
+    title: "Cook & Connect", 
+    description: "Try new recipes from the community, share photos of your results, and exchange tips and feedback with fellow members.", 
+    step: "04" 
+  }
+];
 
   const stats = [
-    { number: "50K+", label: "Active Chefs" },
-    { number: "100K+", label: "Recipes Shared" },
-    { number: "1M+", label: "Happy Cooks" },
-    { number: "4.9★", label: "App Rating" }
+    { number: "50K+", label: "Passionate Home Cooks & Chefs" },
+    { number: "100K+", label: "Mouth-Watering Recipes Shared" },
+    { number: "1M+", label: "Active Community Members" },
+    { number: "4.9★", label: "Average Community Rating" }
   ];
 
-  const testimonials = [
-    { name: "Sarah Chen", role: "Home Chef", content: "LushBites transformed my cooking journey...", image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400", rating: 5 },
-    { name: "Marcus Rodriguez", role: "Food Blogger", content: "As a food blogger, I love how easy it is to share...", image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400", rating: 5 },
-    { name: "Emily Johnson", role: "Professional Chef", content: "The quality of recipes and the attention to detail...", image: "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=400", rating: 5 }
-  ];
-
+const testimonials = [
+  { 
+    name: "Priya Sharma", 
+    role: "Home Baker from Mumbai", 
+    content: "LushBites has completely transformed my baking journey! I've found incredible, hard-to-find recipes for traditional sweets and modern cakes. The community is so warm and always ready to help with tips and encouragement.", 
+    image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400", 
+    rating: 5 
+  },
+  { 
+    name: "Rohan Patel", 
+    role: "Software Engineer & Foodie from Bengaluru", 
+    content: "As a tech professional, I really appreciate a well-designed app. LushBites is not only beautiful but incredibly intuitive. It's my go-to for finding quick, delicious weeknight dinner ideas after a long day at work.", 
+    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400", 
+    rating: 5 
+  },
+  { 
+    name: "Anjali Verma", 
+    role: "Culinary Student from Delhi", 
+    content: "The quality of recipes and the authenticity of the techniques you can learn here is outstanding. From regional Indian cuisines to international dishes, this app has become an essential tool for my culinary education.", 
+    image: "https://images.pexels.com/photos/1181519/pexels-photo-11815-19.jpeg?auto=compress&cs=tinysrgb&w=400", 
+    rating: 5 
+  }
+];
   return (
     <div className="min-h-screen bg-white">
       {/* --- UPDATED NAVIGATION --- */}
